@@ -1,0 +1,23 @@
+{
+  "name": "hybris",
+  "version": "0.0.1",
+  "type": "flogo:activity",
+  "description": "activity description",
+  "author": "Vinayak03 <vkadam@tibco.com>",
+  "inputs":[
+    {
+      "name": "salutation",
+      "type": "string"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "result",
+      "type": "string"
+    }
+  ]
+}
