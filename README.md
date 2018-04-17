@@ -1,1 +1,0 @@
-echo "# Akatsuki-flogo" 
