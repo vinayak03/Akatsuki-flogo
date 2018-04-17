@@ -5,25 +5,25 @@ import (
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 )
 
-var log = logger.GetLogger("activity-helloworld")
+var log = logger.GetLogger("activity-hybris")
 
-// MyActivity is a stub for your Activity implementation
-type MyActivity struct {
+// HybrisActivity is a stub for your Activity implementation
+type HybrisActivity struct {
 	metadata *activity.Metadata
 }
 
 // NewActivity creates a new activity
 func NewActivity(metadata *activity.Metadata) activity.Activity {
-	return &MyActivity{metadata: metadata}
+	return &HybrisActivity{metadata: metadata}
 }
 
 // Metadata implements activity.Activity.Metadata
-func (a *MyActivity) Metadata() *activity.Metadata {
+func (a *HybrisActivity) Metadata() *activity.Metadata {
 	return a.metadata
 }
 
 // Eval implements activity.Activity.Eval
-func (a *MyActivity) Eval(context activity.Context) (done bool, err error)  {
+func (a *HybrisActivity) Eval(context activity.Context) (done bool, err error)  {
 
 	// Get the activity data from the context
 	name := context.GetInput("name").(string)
