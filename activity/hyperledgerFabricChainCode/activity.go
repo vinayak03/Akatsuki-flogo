@@ -1,4 +1,4 @@
-package fabricChainCode
+package hyperledgerFabricChainCode
 
 import (
 	fabric "github.com/vinayak03/Akatsuki-flogo/hyperledgerFabric"

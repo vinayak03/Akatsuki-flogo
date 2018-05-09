@@ -1,5 +1,5 @@
 {
-  "name": "fabric-chaincode",
+  "name": "hyperledgerFabricChainCode",
   "version": "0.0.1",
   "type": "flogo:activity",
   "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricChainCode",
