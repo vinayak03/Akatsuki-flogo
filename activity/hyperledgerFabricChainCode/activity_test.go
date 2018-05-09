@@ -1,4 +1,4 @@
-package fabricChainCode
+package hyperledgerFabricChainCode
 
 import (
 	"io/ioutil"
