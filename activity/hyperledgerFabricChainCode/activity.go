@@ -1,13 +1,16 @@
 package hyperledgerFabricChainCode
 
 import (
-	fabric "github.com/vinayak03/Akatsuki-flogo/hyperledgerFabric"
-	"github.com/TIBCOSoftware/flogo-lib/core/activity"
-	"github.com/TIBCOSoftware/flogo-lib/logger"
-	channel "github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
-	retry "github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
 	"encoding/json"
 	"strconv"
+	
+	"github.com/TIBCOSoftware/flogo-lib/core/activity"
+	"github.com/TIBCOSoftware/flogo-lib/logger"
+	fabric "github.com/vinayak03/Akatsuki-flogo/hyperledgerFabric"
+)
+import(
+	channel "github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
+	retry "github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
 )
 
 var (
