@@ -1,0 +1,63 @@
+{
+  "name": "fabric-chaincode",
+  "version": "0.0.1",
+  "type": "flogo:activity",
+  "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricChainCode",
+  "description": "Plugin to Invoke and Query Hyperledger Smart Contracts(ChainCodes)",
+  "author": "Vinayak Kadam <vkadam@tibco.com>",
+  "inputs":[
+    {
+      "name": "NetworkConfig",
+      "type": "string"
+    },
+	{
+      "name": "RequestType",
+      "type": "string",
+	  "required": true,
+      "allowed" : ["Query", "Execute"]
+    },
+	{
+      "name": "ChannelID",
+      "type": "string"
+    },
+	{
+      "name": "User",
+      "type": "string"
+    },
+    {
+      "name": "UserPasswd",
+      "type": "string"
+    },
+    {
+      "name": "UserOrg",
+      "type": "string"
+    },
+	{
+      "name": "ChainCodeID",
+      "type": "string"
+    },
+	{
+      "name": "FunctionName",
+      "type": "string"
+    },
+	{
+      "name": "Params",
+      "type": "any"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "status",
+      "type": "string"
+    },
+    {
+      "name": "ResponsePayload",
+      "type": "string"
+    },
+    {
+      "name": "ErrorMessage",
+      "type": "string"
+    }
+    
+  ]
+}
