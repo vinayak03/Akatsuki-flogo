@@ -4,8 +4,8 @@ import (
 	fabric "github.com/vinayak03/Akatsuki-flogo/hyperledgerFabric"
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
-	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
-	"github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
+	channel "github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
+	retry "github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
 	"encoding/json"
 	"strconv"
 )
