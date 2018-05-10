@@ -42,8 +42,8 @@
   version = "1.2.1"
 
 [[constraint]]
-  branch = "master"
   name = "github.com/vinayak03/Akatsuki-flogo"
+  version = "0.0.1"
 
 [prune]
   go-tests = true
