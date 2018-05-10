@@ -124,6 +124,7 @@
   revision = "ef8a98b0bbce4a65b5aa4c368430a80ddc533168"
 
 [[projects]]
+  branch = "master"
   name = "github.com/hyperledger/fabric-sdk-go"
   packages = [
     "internal/github.com/hyperledger/fabric-ca/api",
@@ -227,8 +228,7 @@
     "third_party/github.com/hyperledger/fabric/protos/peer",
     "third_party/github.com/hyperledger/fabric/protos/utils"
   ]
-  revision = "ccecff43fb363c92c23975fe3580eec982a0024e"
-  version = "v1.0.0-alpha3"
+  revision = "ba0e035b4a43d42233f0b40a3a35d0eb0e3a1c98"
 
 [[projects]]
   name = "github.com/magiconair/properties"
