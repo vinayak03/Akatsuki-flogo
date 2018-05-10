@@ -150,11 +150,13 @@
     "pkg/client/common/discovery",
     "pkg/client/common/discovery/greylist",
     "pkg/client/common/discovery/staticdiscovery",
+    "pkg/client/common/filter",
     "pkg/client/common/selection/options",
     "pkg/client/common/selection/staticselection",
     "pkg/client/common/verifier",
     "pkg/client/msp",
     "pkg/client/resmgmt",
+    "pkg/common/errors/multi",
     "pkg/common/errors/retry",
     "pkg/common/errors/status",
     "pkg/common/logging",
@@ -166,8 +168,10 @@
     "pkg/context",
     "pkg/core/config",
     "pkg/core/config/comm",
+    "pkg/core/config/comm/tls",
     "pkg/core/config/cryptoutil",
     "pkg/core/config/endpoint",
+    "pkg/core/config/lookup",
     "pkg/core/cryptosuite",
     "pkg/core/cryptosuite/bccsp/sw",
     "pkg/core/cryptosuite/bccsp/wrapper",
@@ -175,6 +179,7 @@
     "pkg/core/logging/metadata",
     "pkg/core/logging/modlog",
     "pkg/core/mocks",
+    "pkg/fab",
     "pkg/fab/channel",
     "pkg/fab/channel/membership",
     "pkg/fab/chconfig",
@@ -199,7 +204,6 @@
     "pkg/fab/orderer",
     "pkg/fab/peer",
     "pkg/fab/resource",
-    "pkg/fab/resource/api",
     "pkg/fab/signingmgr",
     "pkg/fab/txn",
     "pkg/fabsdk",
@@ -216,7 +220,7 @@
     "pkg/util/concurrent/futurevalue",
     "pkg/util/concurrent/lazycache",
     "pkg/util/concurrent/lazyref",
-    "pkg/util/errors/multi",
+    "pkg/util/pathvar",
     "test/metadata",
     "third_party/github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil",
     "third_party/github.com/hyperledger/fabric/core/ledger/util",
@@ -409,6 +413,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4d97a696559a1ed020d024d3f1deae0a98db0334717734fdfe7f4f4a2ad6a0cf"
+  inputs-digest = "9c2b7b7f9caadd2c8236e72e3a07bd2baa8bde7e019981f354916532f1a2fc4a"
   solver-name = "gps-cdcl"
   solver-version = 1
