@@ -1,6 +1,6 @@
 {
   "name": "hyperledgerFabricChainCode",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "flogo:activity",
   "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricChainCode",
   "description": "Plugin to Invoke and Query Hyperledger Smart Contracts(ChainCodes)",
