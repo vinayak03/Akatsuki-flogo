@@ -49,36 +49,43 @@ Inputs and Outputs:
 	{
       "name": "RequestType",
       "type": "string",
-	  "required": true,
+      "required": true,
       "allowed" : ["Query", "Execute"]
     },
 	{
       "name": "ChannelID",
-      "type": "string"
+      "type": "string",
+      "required": true
     },
 	{
       "name": "User",
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     {
       "name": "UserPasswd",
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     {
       "name": "UserOrg",
-      "type": "string"
+      "type": "string",
+      "required": true
     },
 	{
       "name": "ChainCodeID",
-      "type": "string"
+      "type": "string",
+      "required": true
     },
 	{
       "name": "FunctionName",
-      "type": "string"
+      "type": "string",
+      "required": true
     },
 	{
       "name": "Params",
-      "type": "array"
+      "type": "array",
+      "required": true
     }
   ],
   "outputs": [
