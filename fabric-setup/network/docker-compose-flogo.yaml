@@ -1,0 +1,24 @@
+#
+# Copyright IBM Corp All Rights Reserved
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+version: '2'
+
+networks:
+  Akatsuki:
+
+services:
+  flogo.example.com:
+    image: flogo/flogo-docker
+    environment:
+      - CONFIG_LOCATION=/etc/hyperledger/client/config.yaml
+    ports:
+      - "3303:3303"
+    command: eula-accept 
+    volumes:
+      - ./crypto-config/:/etc/hyperledger/crypto-config
+      - ../client/:/etc/hyperledger/client
+    container_name: flogo.example.com
+    networks:
+      - Akatsuki
