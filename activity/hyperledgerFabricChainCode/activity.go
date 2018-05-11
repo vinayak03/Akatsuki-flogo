@@ -30,8 +30,8 @@ const(
 	iValueFunctionName = "FunctionName"
 	iValueParams = "Params"
 	
-	REQUEST_TYPE_QUERY = "QUERY"
-	REQUEST_TYPE_EXECUTE = "EXECUTE"
+	REQUEST_TYPE_QUERY = "Query"
+	REQUEST_TYPE_EXECUTE = "Execute"
 	
 )
 
