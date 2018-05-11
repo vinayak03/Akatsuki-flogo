@@ -304,10 +304,10 @@
   version = "v1.2.1"
 
 [[projects]]
+  branch = "master"
   name = "github.com/vinayak03/Akatsuki-flogo"
   packages = ["hyperledgerFabric"]
-  revision = "02aadc953c6fd33634ab08ca83a102456bb30f86"
-  version = "v0.0.1"
+  revision = "556174f7ceba72ed95c673cdfad4a1a54a6f10bd"
 
 [[projects]]
   branch = "master"
@@ -413,6 +413,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b0ac0deceae9b588562ff1893d97393f153b8fb13422bd3d634a2c42c5f11283"
+  inputs-digest = "9c2b7b7f9caadd2c8236e72e3a07bd2baa8bde7e019981f354916532f1a2fc4a"
   solver-name = "gps-cdcl"
   solver-version = 1
