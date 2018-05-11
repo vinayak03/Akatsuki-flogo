@@ -7,14 +7,32 @@ import (
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 	fabric "github.com/vinayak03/Akatsuki-flogo/hyperledgerFabric"
-)
-import(
 	channel "github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 	retry "github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
 )
-
 var (
 	log = logger.GetLogger("activity-fabric-chaincode")
+)
+
+const(
+	oValueStatus = "Status"
+	oValueErrorMessage = "ErrorMessage"
+	oValueResponsePayload = "ResponsePayload"
+	oValueTransactionID = "TransactionID"
+	eInternalError="500"
+	iValueNetworkConfig = "NetworkConfig"
+	iValueRequestType = "RequestType"
+	iValueChainCodeID = "ChainCodeID"
+	iValueChannelID = "ChannelID"
+	iValueUser = "User"
+	iValueUserPasswd = "UserPasswd"
+	iValueUserOrg = "UserOrg"
+	iValueFunctionName = "FunctionName"
+	iValueParams = "Params"
+	
+	REQUEST_TYPE_QUERY = "QUERY"
+	REQUEST_TYPE_EXECUTE = "EXECUTE"
+	
 )
 
 type Params struct {
@@ -40,25 +58,25 @@ func (a *ChainCodeActivity) Metadata() *activity.Metadata {
 func (a *ChainCodeActivity) Eval(context activity.Context) (done bool, err error) {
 	var status string
 	var payload string
-	
+	var transactionID string
 	//Initialize the sdk 
-	networkConfig := context.GetInput("NetworkConfig").(string)
+	networkConfig := context.GetInput(iValueNetworkConfig).(string)
 	SDK, err := fabric.GetSDK(networkConfig)
 
 	if err != nil {
-		setOutput(context,"500","",err.Error())
+		setOutput(context,eInternalError,"",err.Error(),"")
 		return true, nil
 	}
 	
 	//Extract the details from activity request.
-	requestType := context.GetInput("RequestType").(string)
-	chainID := context.GetInput("ChainCodeID").(string)
-	channelID := context.GetInput("ChannelID").(string)
-	user := context.GetInput("User").(string)
-	userPasswd := context.GetInput("UserPasswd").(string)
-	userOrg := context.GetInput("UserOrg").(string)
-	functionName := context.GetInput("FunctionName").(string)
-	inputParams := context.GetInput("Params").(string)
+	requestType := context.GetInput(iValueRequestType).(string)
+	chainID := context.GetInput(iValueChainCodeID).(string)
+	channelID := context.GetInput(iValueChannelID).(string)
+	user := context.GetInput(iValueUser).(string)
+	userPasswd := context.GetInput(iValueUserPasswd).(string)
+	userOrg := context.GetInput(iValueUserOrg).(string)
+	functionName := context.GetInput(iValueFunctionName).(string)
+	inputParams := context.GetInput(iValueParams).(string)
 	
 	//check if the user is present in local trustsore if not enroll it in local truststore.
 	fabric.EnrollWithOrg(SDK, userOrg, user, userPasswd)
@@ -66,7 +84,7 @@ func (a *ChainCodeActivity) Eval(context activity.Context) (done bool, err error
 	//Convert json array to string array
 	params := Params{}
 	if resp := json.Unmarshal([]byte(inputParams), &params);  resp!=nil {
-		setOutput(context,"500","",err.Error())
+		setOutput(context,eInternalError,"",err.Error(),"")
 		return true,nil
 	}
 	
@@ -82,17 +100,17 @@ func (a *ChainCodeActivity) Eval(context activity.Context) (done bool, err error
 	channelCtx,err := fabric.GetChannelContext(SDK, channelID, user)
 	channelClient,err := channel.New(channelCtx)
 	if err!=nil {
-		setOutput(context,"500","",err.Error())
+		setOutput(context,"500","",err.Error(),"")
 		return true, nil
 	}
-	if requestType == "Query" {
+	if requestType == REQUEST_TYPE_QUERY {
 		resp, err := channelClient.Query(channel.Request{
 			ChaincodeID: chainID,
 			Fcn:         functionName,
 			Args:        args},
 			channel.WithRetry(retry.DefaultChannelOpts))
 		if err != nil {
-			setOutput(context,"500","",err.Error())
+			setOutput(context,eInternalError,"",err.Error(),"")
 			return true,nil
 		}
 		
@@ -107,22 +125,26 @@ func (a *ChainCodeActivity) Eval(context activity.Context) (done bool, err error
 			Args:        args},
 			channel.WithRetry(retry.DefaultChannelOpts))
 		if err != nil {
-			setOutput(context,"500","",err.Error())
+			setOutput(context,eInternalError,"",err.Error(),"")
 			return true,nil
 		}
 		
 		status = strconv.FormatInt(int64(resp.ChaincodeStatus),10)
 		payload= string(resp.Payload)
+		transactionID = string(resp.TransactionID)
+		
 		log.Info("Response Payload : ",payload)
+		
 	}
 	
-	setOutput(context,status,payload,"")
+	setOutput(context,status,payload,"",transactionID)
 	return true, nil
 }
 
 //This will set all the response variable to be sent back.
-func setOutput(context activity.Context, status string, payload string, errorMessage string){
-		context.SetOutput("status", status)
-		context.SetOutput("ErrorMessage", errorMessage)
-		context.SetOutput("ResponsePayload", payload)
+func setOutput(context activity.Context, status string, payload string, errorMessage string, transactionID string){
+		context.SetOutput(oValueStatus, status)
+		context.SetOutput(oValueErrorMessage, errorMessage)
+		context.SetOutput(oValueResponsePayload, payload)
+		context.SetOutput(oValueTransactionID, transactionID)
 }

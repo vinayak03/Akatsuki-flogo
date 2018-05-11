@@ -7,7 +7,6 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/core/config"
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/context"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
-	"os"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
 )
 
@@ -17,23 +16,24 @@ const (
 
 var (
 	SDKStore map [string]*fabsdk.FabricSDK= make(map [string]*fabsdk.FabricSDK);
-	log = logger.GetLogger("activity-fabric-chaincode")
+	log = logger.GetLogger("flogo-common-fabric")
 )
 
-func GetSDK(env string) (* fabsdk.FabricSDK, error) {
+func GetSDK(configLocation string) (* fabsdk.FabricSDK, error) {
 	//if SDK==nil {
-		configLocation := os.Getenv(env)
 		if configLocation==""{
-			return nil,fmt.Errorf("Invalid Environment Variable")
+			return nil,fmt.Errorf("Invalid Config File")
 		}
-		//caching the sdk instances based on the config file name (need to correct the paths before using it as key)
+		
+		//caching the sdk instances based on the config file name
+		
 		SDK := SDKStore[configLocation]
 		if SDK ==nil {
-			fmt.Println("SDK Instance not found creating a new one")
+			log.Info("SDK Instance not found creating a new one")
 			SDK,err := fabsdk.New(config.FromFile(configLocation))
 			
 			if err!=nil {
-				return nil,fmt.Errorf("Error in SDK Initialization : %s",err)
+				return nil,fmt.Errorf("Error in SDK Initialization : %s",err.Error())
 			}
 			
 			SDKStore[configLocation]=SDK
@@ -63,7 +63,7 @@ func EnrollWithMSP(SDK *fabsdk.FabricSDK,localMSP * clientmsp.Client,username st
 	identity,err := localMSP.GetSigningIdentity(username)
 	
 	if err!=nil || identity==nil{
-		fmt.Println("Username: ",username,"\nPassword: ",password,clientmsp.WithSecret(password))
+		log.Debug("Username: ",username,"\nPassword: ",password,clientmsp.WithSecret(password))
 		err := localMSP.Enroll(username,clientmsp.WithSecret(password))
 		if err!=nil{
 			return fmt.Errorf("Error enrolling Admin : %s",err)

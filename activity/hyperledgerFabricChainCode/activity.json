@@ -47,7 +47,7 @@
   ],
   "outputs": [
     {
-      "name": "status",
+      "name": "Status",
       "type": "string"
     },
     {
@@ -56,6 +56,11 @@
     },
     {
       "name": "ErrorMessage",
+      "type": "string"
+    }
+    ,
+    {
+      "name": "TransactionID",
       "type": "string"
     }
     

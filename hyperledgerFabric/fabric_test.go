@@ -2,21 +2,25 @@ package hyperledgerFabric
 
 import (
 	 "testing"
-	 "os"
+)
+
+const(
+	GOOD_CONFIG = "D:/Projects/Flogo-Hackthon/go-ws/config.yaml"
+	BAD_CONFIG = "D:/Projects/Flogo-Hackthon/go-ws/cony.yaml"
+	SDK_ERROR = "SDK is Not Created"
 )
 
 func TestGetSDK(t * testing.T){
-	os.Setenv("fabric-config","D:/Projects/Flogo-Hackthon/go-ws/config.yaml")
-	SDK,err := GetSDK("fabric-config")
+	SDK,err := GetSDK(GOOD_CONFIG)
 	
 	if err !=nil || SDK == nil {
-		t.Log("SDK is not Initialized")
+		t.Log(SDK_ERROR,err)
 		t.FailNow()
 	}
 	
-	newSDK,err := GetSDK("fabric-config")
+	newSDK,err := GetSDK(GOOD_CONFIG)
 	if err !=nil || newSDK == nil {
-		t.Log("SDK is not Initialized")
+		t.Log(SDK_ERROR)
 		t.FailNow()
 	}
 	
@@ -27,19 +31,18 @@ func TestGetSDK(t * testing.T){
 }
 
 func TestGetSDKInvalidPath(t * testing.T){
-	os.Setenv("fabric-config-2","D:/Projects/Flogo-Hackthon/go-ws/cony.yaml")
-	SDK,err := GetSDK("fabric-config-2")
+	SDK,err := GetSDK(BAD_CONFIG)
 	if SDK != nil || err==nil {
-		t.Log("SDK is not Initialized",err)
+		t.Log("SDK is not supposed to creare with invalid file",err)
 		t.Fail()
 	}
 }
 
 func TestGetMSP(t *testing.T){
-	os.Setenv("fabric-config-3","D:/Projects/Flogo-Hackthon/go-ws/config.yaml")
-	SDK,err := GetSDK("fabric-config-3")
+	SDK,err := GetSDK(GOOD_CONFIG)
+	
 	if SDK == nil {
-		t.Log("SDK is not Initialized")
+		t.Log(SDK_ERROR,err)
 		t.Fail()
 	}
 	msp,err := GetLocalMSP(SDK,"Org1")
@@ -50,10 +53,10 @@ func TestGetMSP(t *testing.T){
 }
 
 func TestGetResourceMgmt(t *testing.T){
-	os.Setenv("fabric-config-4","D:/Projects/Flogo-Hackthon/go-ws/config.yaml")
-	SDK,err := GetSDK("fabric-config-4")
+	SDK,err := GetSDK(GOOD_CONFIG)
+	
 	if SDK==nil{
-		t.Log("SDK is not Initialized")
+		t.Log(SDK_ERROR,err)
 		t.FailNow()
 	}
 	
@@ -72,10 +75,10 @@ func TestGetResourceMgmt(t *testing.T){
 }
 
 func TestEnroll(t * testing.T){
-	os.Setenv("fabric-config-5","D:/Projects/Flogo-Hackthon/go-ws/config.yaml")
-	SDK,err := GetSDK("fabric-config-5")
+	SDK,err := GetSDK(GOOD_CONFIG)
+	
 	if SDK==nil{
-		t.Log("SDK is not Initialized")
+		t.Log(SDK_ERROR)
 		t.FailNow()
 	}
 	err = EnrollWithOrg(SDK,"Org1", "admin", "adminpw")
