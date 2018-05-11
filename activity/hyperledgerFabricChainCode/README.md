@@ -1,48 +1,37 @@
----
-title: Hyperledger-Fabric-ChainCode
-weight: 4615
----
-
-# Hyperledger-Fabric-ChainCode
+# Hyperledger-Fabric-ChainCode Flogo Activity
 This activity allows you to execute and query the fabric chain code(smart contract)
 
 ## Pre-requisite
 ### Sample Hyperledger Network Setup
-#### Download Hyperledger images
+Note: Run the below steps in powershell on windows
+#### Download Hyperledger network images
 	Inside the directory [a relative link]../../fabric-setup/network/
-	```bash
 	sh bootstrap.sh 1.1.0
-	```
+
 #### Start a basic network with fabcar chaincode
 	Inside directory [a relative link]../../fabric-setup/network/
-	```bash
 	sh start.sh
-	```
+
 #### Configure users in the network to users
 	Inside [a relative link]../../fabric-setup/script
 	//node dependency installtion
-	```bash
-	npm install   
-	```
-	//Get the default admin user from ca
-	```bash
-	node enrollAdmin.js
-	```
-	//register the user to be used with the chaincode example.
-	```bash
-	node registerUser.js
-	```
+	npm install
 
+	//Get the default admin user from ca
+	node enrollAdmin.js
+
+	//register the user to be used with the chaincode example.
+	node registerUser.js
 
 ## Installation
 ###Flogo-webui
 	Inside directory [a relative link]../../fabric-setup/network/
-	```bash
+
 	sh flogo-activity-install.sh
-	```
+	
 	if the web-ui is already running it would need a restart.
 ### Flogo-cli
-```bash
+```
 flogo add activity github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricChainCode
 flogo ensure -add github.com/hyperledger/fabric-sdk-go@ba0e035b4a43d42233f0b40a3a35d0eb0e3a1c98
 ```
