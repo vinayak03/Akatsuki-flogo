@@ -1,6 +1,6 @@
 {
   "name": "hyperledgerFabricChainCode",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "type": "flogo:activity",
   "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricChainCode",
   "description": "Plugin to Invoke and Query Hyperledger Smart Contracts(ChainCodes)",
@@ -18,31 +18,38 @@
     },
 	{
       "name": "ChannelID",
-      "type": "string"
+      "type": "string",
+	  "required": true
     },
 	{
       "name": "User",
-      "type": "string"
+      "type": "string",
+	  "required": true
     },
     {
       "name": "UserPasswd",
-      "type": "string"
+      "type": "string",
+	  "required": true
     },
     {
       "name": "UserOrg",
-      "type": "string"
+      "type": "string",
+	  "required": true
     },
 	{
       "name": "ChainCodeID",
-      "type": "string"
+      "type": "string",
+	  "required": true
     },
 	{
       "name": "FunctionName",
-      "type": "string"
+      "type": "string",
+	  "required": true
     },
 	{
       "name": "Params",
-      "type": "any"
+      "type": "any",
+	  "required": true
     }
   ],
   "outputs": [
