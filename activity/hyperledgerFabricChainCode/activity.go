@@ -83,7 +83,7 @@ func (a *ChainCodeActivity) Eval(context activity.Context) (done bool, err error
 	
 	//Convert json array to string array
 	params := Params{}
-	if resp := json.Unmarshal([]byte(inputParams), &params);  resp!=nil {
+	if err := json.Unmarshal([]byte(inputParams), &params);  err!=nil {
 		setOutput(context,eInternalError,"",err.Error(),"")
 		return true,nil
 	}

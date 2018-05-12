@@ -5,8 +5,8 @@ import (
 )
 
 const(
-	GOOD_CONFIG = "D:/Projects/Flogo-Hackthon/go-ws/config.yaml"
-	BAD_CONFIG = "D:/Projects/Flogo-Hackthon/go-ws/cony.yaml"
+	GOOD_CONFIG = "../fabric-setup/client/config.yaml"
+	BAD_CONFIG = "../fabric-setup/client/cony.yaml"
 	SDK_ERROR = "SDK is Not Created"
 )
 
