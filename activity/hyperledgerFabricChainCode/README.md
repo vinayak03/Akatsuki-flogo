@@ -36,6 +36,10 @@ Note: Run the below steps in powershell on windows
 
 	sh flogo-activity-install.sh
 	
+	For Windows you can run the below bat file:
+	
+	flogo-activity-install.bat
+	
 	if the web-ui is already running it would need a restart.
 ### Flogo-cli
 ```
