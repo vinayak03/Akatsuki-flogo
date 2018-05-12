@@ -1,19 +1,26 @@
-# Hyperledger-Fabric-ChainCode Flogo Activity
+# Flogo Activity Hyperledger-Fabric-ChainCode
 This activity allows you to execute and query the fabric chain code(smart contract)
 
 ## Pre-requisite
+### Dependencies
+1. Docker and Docker-Compose
+2. Node
+3. Golang 1.9.4
+4. fabric-sdk-go https://godoc.org/github.com/hyperledger/fabric-sdk-go
+5. It is uses basic network setup and sample chaincode from https://github.com/hyperledger/fabric-samples
+
 ### Sample Hyperledger Network Setup
 Note: Run the below steps in powershell on windows
 #### Download Hyperledger network images
-	Inside the directory [a relative link]../../fabric-setup/network/
+	Inside the directory ../../fabric-setup/network/
 	sh bootstrap.sh 1.1.0
 
 #### Start a basic network with fabcar chaincode
-	Inside directory [a relative link]../../fabric-setup/network/
+	Inside directory ../../fabric-setup/network/
 	sh start.sh
 
 #### Configure users in the network to users
-	Inside [a relative link]../../fabric-setup/script
+	Inside ../../fabric-setup/script
 	//node dependency installtion
 	npm install
 
@@ -25,7 +32,7 @@ Note: Run the below steps in powershell on windows
 
 ## Installation
 ###Flogo-webui
-	Inside directory [a relative link]../../fabric-setup/network/
+	Inside directory ../../fabric-setup/network/
 
 	sh flogo-activity-install.sh
 	
@@ -110,21 +117,29 @@ Inputs and Outputs:
   ]
 }
 ```
-## Settings
-| Setting            | Required | Description |
-|:-------------------|:---------|:------------|
+## Input
+| Input Parameter    | Required | Description                                                                 |
+|:-------------------|:---------|:----------------------------------------------------------------------------|
 | NetworkConfig      | True     | yaml configuration file describing the network and artifacts for network.
-| RequestType        | False    | Query/Execute Operation
-| ChannelID          | False    | On which channel the transaction/operation needs to be completed.
-| User               | False    | User to be used for doing the transactio
+| RequestType        | True     | Query/Execute Operation
+| ChannelID          | True     | On which channel the transaction/operation needs to be completed.
+| User               | True     | User to be used for doing the transaction
 | UserPasswd         | True     | Password for user
-| UserOrg            | False    | Org for which the user belongs
-| ChainCodeID        | False    | the chaincode which will be executed eg. fabcar
-| FunctionName       | False    | name of the function in chaincode
-| Params             | False    | the parameter array of strings , every function can have verying arguments.
+| UserOrg            | True     | Org for which the user belongs
+| ChainCodeID        | True     | the chaincode which will be executed eg. fabcar
+| FunctionName       | True     | name of the function in chaincode
+| Params             | True     | the parameter array of strings , every function can have varying arguments.
+
+## Output
+| Output Parameter    | Required | Description                                                                 |
+|:-------------------|:---------|:---------------------------------------------------------------------------- |
+| Status             | True     | Successfull operation will return a status of 200 and error in processing will return 500
+| ResponsePayload    | False    | Any response payload coming from the chaincode
+| ErrorMessage       | False    | In case of error in processing it will return the detailed error message in this field.
+| TransactionID      | False    | In case of execute transactions transactionId is generated for executed transaction.
 
 ## Examples
-The below example chaincode queries 'queryAllCars' function:
+The below example chaincode queries 'queryAllCars' function of fabcar chaincode:
 
 ```json
 {
@@ -191,7 +206,7 @@ The below example chaincode queries 'queryAllCars' function:
 }
 ```
 
-The below example chaincode queries 'queryCar' function:
+The below example chaincode queries 'queryCar' function of fabcar chaincode:
 
 ```json
 {
