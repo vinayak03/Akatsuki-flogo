@@ -22,7 +22,7 @@
       "required": true
     },
 	{
-      "name": "AdminPasswd",
+      "name": "AdminPassword",
       "type": "string",
       "required": true
     },
@@ -30,8 +30,12 @@
       "name": "Username",
       "type": "string",
       "required": true
-    }
-    ,
+    },
+    {
+      "name": "UserPassword",
+      "type": "string",
+      "required": true
+    },
     {
       "name": "TypeOfUser",
       "type": "string",

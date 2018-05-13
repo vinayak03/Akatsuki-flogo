@@ -1,15 +1,16 @@
 package hyperledgerFabricMSP
 
 import (
-	"github.com/TIBCOSoftware/flogo-contrib/action/flow/test"
+//	"github.com/TIBCOSoftware/flogo-contrib/action/flow/test"
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
-	"github.com/stretchr/testify/assert"
+//	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"testing"
+	fabric "github.com/vinayak03/Akatsuki-flogo/hyperledgerFabric"
 )
 
 const (
-	CONFIG = "D:/Projects/Flogo-Hackthon/go-ws/config.yaml"
+	CONFIG = "C:/Users/rvadde/Akatsuki-flogo/fabric-setup/client/config.yaml"
 )
 
 var activityMetadata *activity.Metadata
@@ -37,4 +38,20 @@ func TestCreate(t *testing.T) {
 		t.Fail()
 		return
 	}
+}
+
+
+
+func TestRevoke(t *testing.T) {
+	
+	SDK, err := fabric.GetSDK(CONFIG)
+	if err==nil{
+	revokeUsr := RevokeUser(SDK, "User", "1234", "0", "User not granted access", "CA","Affiliation")
+	 if revokeUsr == nil {
+		t.Log("Access revoked")
+		return
+	}
+	}
+	
+	
 }
