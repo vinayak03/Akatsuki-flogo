@@ -1,24 +1,24 @@
 {
-  "name": "hybris",
+  "name": "hybrisProduct",
   "version": "0.0.1",
-  "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hybris",
+  "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hybrisProduct",
   "type": "flogo:activity",
   "description": "activity description",
-  "author": "Vinayak03 <vkadam@tibco.com>",
+  "author": "Prashant Shinde <prshinde@tibco.com>, Vinayak03 vkadam@tibco.com, Rajesh rvadde@tibco.com",
   "inputs":[
     {
       "name": "requestType",
       "type": "string",
 	  "required": true,
-      "allowed" : ["Query", "Execute"]
+      "allowed" : ["GetAllProducts", "GetProduct","CreateProduct","UpdateProduct","DeleteProduct","DeleteAllProducts"]
     },
     {
-      "name": "apiKey",
+      "name": "APIKey",
       "type": "string",
       "required": true
     },
     {
-      "name": "url",
+      "name": "URL",
       "type": "string",
       "required": true
     },
@@ -29,6 +29,11 @@
     },
     {
       "name": "productId",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "body",
       "type": "string",
       "required": false
     }

@@ -3,6 +3,7 @@ package hybrisProduct
 import (
 	"github.com/TIBCOSoftware/flogo-contrib/action/flow/test"
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
+	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"testing"
 )
@@ -33,20 +34,67 @@ func TestGetProduct(t *testing.T) {
 	act := NewActivity(getActivityMetadata())
 	tc := test.NewTestActivityContext(getActivityMetadata())
 
-	setInput(tc, "Get", "bvCSvnE0BAYcOLKFAD9GxnSToKIwUUWJ", "https://api.beta.yaas.io/hybris/product/v2/{tenant}/products", "dummy", "product1")
+	setInput(tc, "GetProduct", "bvCSvnE0BAYcOLKFAD9GxnSToKIwUUWJ", "http://localhost:7778", "dummy", "product1", "")
 
 	act.Eval(tc)
 
-	status := tc.GetOutput(oValueStatus)
+	status := tc.GetOutput(oValueStatus).(string)
 	payload := tc.GetOutput(oValueResponsePayload)
 
+	assert.Equal(t, "200", status, "Response Code doesnot match")
 	t.Log("TestQuery Output\n Status:", status, "\nResponsePayload", payload)
 }
 
-func setInput(tc *test.TestActivityContext, requestType string, apiKey string, url string, tenant string, productId string) {
+func TestGetAllProducts(t *testing.T) {
+	act := NewActivity(getActivityMetadata())
+	tc := test.NewTestActivityContext(getActivityMetadata())
+
+	setInput(tc, "GetAllProducts", "bvCSvnE0BAYcOLKFAD9GxnSToKIwUUWJ", "http://localhost:7778", "dummy", "", "")
+
+	act.Eval(tc)
+
+	status := tc.GetOutput(oValueStatus).(string)
+	payload := tc.GetOutput(oValueResponsePayload)
+
+	assert.Equal(t, "200", status, "Response Code doesnot match")
+	t.Log("TestGetProducts Output\n Status:", status, "\nResponsePayload", payload)
+}
+
+func TestDeleteAllProducts(t *testing.T) {
+	act := NewActivity(getActivityMetadata())
+	tc := test.NewTestActivityContext(getActivityMetadata())
+
+	setInput(tc, "GetAllProducts", "bvCSvnE0BAYcOLKFAD9GxnSToKIwUUWJ", "http://localhost:7778", "dummy", "", "")
+
+	act.Eval(tc)
+
+	status := tc.GetOutput(oValueStatus).(string)
+	payload := tc.GetOutput(oValueResponsePayload)
+
+	assert.Equal(t, "200", status, "Response Code doesnot match")
+	t.Log("TestGetProducts Output\n Status:", status, "\nResponsePayload", payload)
+}
+
+func TestUpdateProduct(t *testing.T) {
+	act := NewActivity(getActivityMetadata())
+	tc := test.NewTestActivityContext(getActivityMetadata())
+
+	setInput(tc, "UpdateProduct", "bvCSvnE0BAYcOLKFAD9GxnSToKIwUUWJ", "http://localhost:7778", "dummy", "1", "{\"metadata\": {\"mixins\": \"string\",\"variants\": {\"option\": \"string\"}},\"code\": \"string\",\"name\": \"string\",\"description\": \"string\",\"published\": true,\"mixins\": {\"type\": \"string\"}}")
+
+	act.Eval(tc)
+
+	status := tc.GetOutput(oValueStatus).(string)
+	payload := tc.GetOutput(oValueResponsePayload)
+
+	assert.Equal(t, "200", status, "Response Code doesnot match")
+	t.Log("TestGetProducts Output\n Status:", status, "\nResponsePayload", payload)
+}
+
+func setInput(tc *test.TestActivityContext, requestType string, APIKey string, url string, tenant string, productId string, body string) {
 	tc.SetInput(iValueRequestType, requestType)
-	tc.SetInput(iValueApiKey, apiKey)
+	tc.SetInput(iValueAPIKey, APIKey)
 	tc.SetInput(iValueUrl, url)
 	tc.SetInput(iValueTenant, tenant)
 	tc.SetInput(iValueProductId, productId)
+	tc.SetInput(iValueBody, body)
 }
