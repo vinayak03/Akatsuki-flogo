@@ -120,69 +120,57 @@ Inputs and Outputs:
 | ErrorMessage       | False    | In case of error in processing it will return the detailed error message in this field.
 
 ## Examples
-The below example chaincode queries 'queryAllCars' function of fabcar chaincode:
+The below example List All channels in the network
 
 ```json
 {
-	"id": "hyperledgerFabricChainCode_2",
-	"name": "hyperledgerFabricChainCode",
-	"description": "Plugin to Invoke and Query Hyperledger Smart Contracts(ChainCodes)",
+	"id": "hyperledgerFabricList_2",
+	"name": "hyperledgerFabricList",
+	"description": "Plugin to List Channel and Chaincodes",
 	"type": 1,
-	"activityType": "hyperledgerFabricChainCode",
-	"activityRef": "github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricChainCode",
+	"activityType": "hyperledgerFabricList",
+	"activityRef": "github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricList",
 	"attributes": [{
 		"name": "NetworkConfig",
 		"value": "/etc/hyperledger/client/config.yaml",
+		"required": false,
+		"type": "string"
+	},
+	{
+		"name": "ResourceType",
+		"value": "Channel",
 		"required": true,
 		"type": "string"
 	},
 	{
-		"name": "RequestType",
-		"value": "Query",
-		"required": true,
+		"name": "AdminUser",
+		"value": "admin",
+		"required": false,
+		"type": "string"
+	},
+	{
+		"name": "AdminPasswd",
+		"value": "adminpw",
+		"required": false,
+		"type": "string"
+	},
+	{
+		"name": "Org",
+		"value": "Org1",
+		"required": false,
 		"type": "string"
 	},
 	{
 		"name": "ChannelID",
-		"value": "mychannel",
-		"required": true,
+		"value": null,
+		"required": false,
 		"type": "string"
 	},
 	{
-		"name": "User",
-		"value": "user1",
-		"required": true,
+		"name": "QueryParam",
+		"value": "grpc://peer0.org1.example.com:7051",
+		"required": false,
 		"type": "string"
-	},
-	{
-		"name": "UserPasswd",
-		"value": "user1pw",
-		"required": true,
-		"type": "string"
-	},
-	{
-		"name": "UserOrg",
-		"value": "Org1",
-		"required": true,
-		"type": "string"
-	},
-	{
-		"name": "ChainCodeID",
-		"value": "fabcar",
-		"required": true,
-		"type": "string"
-	},
-	{
-		"name": "FunctionName",
-		"value": "queryAllCars",
-		"required": true,
-		"type": "string"
-	},
-	{
-		"name": "Params",
-		"value": "{\"params\" : []}",
-		"required": true,
-		"type": "any"
 	}]
 }
 ```
