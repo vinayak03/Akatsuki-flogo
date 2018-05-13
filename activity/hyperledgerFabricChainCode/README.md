@@ -4,7 +4,7 @@ This activity allows you to execute and query the fabric chain code(smart contra
 ## Pre-requisite
 ### Dependencies
 1. Docker and Docker-Compose
-2. Node
+2. Node.js 
 3. Golang 1.9.4
 4. fabric-sdk-go https://godoc.org/github.com/hyperledger/fabric-sdk-go
 5. It is uses basic network setup and sample chaincode from https://github.com/hyperledger/fabric-samples
@@ -31,7 +31,7 @@ Note: Run the below steps in powershell on windows
 	node registerUser.js
 
 ## Installation
-###Flogo-webui
+### Flogo-webui
 	Inside directory ../../fabric-setup/network/
 
 	sh flogo-activity-install.sh
