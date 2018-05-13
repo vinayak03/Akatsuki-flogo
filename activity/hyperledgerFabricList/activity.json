@@ -1,9 +1,9 @@
 {
-  "name": "hyperledgerFabricChainCode",
+  "name": "hyperledgerFabricList",
   "version": "0.0.1",
   "type": "flogo:activity",
-  "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricChainCode",
-  "description": "Plugin to Invoke and Query Hyperledger Smart Contracts(ChainCodes)",
+  "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricList",
+  "description": "Plugin to List Channel and Chaincodes",
   "author": "Vinayak Kadam <vkadam@tibco.com>",
   "inputs":[
     {
@@ -51,11 +51,5 @@
       "name": "ErrorMessage",
       "type": "string"
     }
-    ,
-    {
-      "name": "TransactionID",
-      "type": "string"
-    }
-    
   ]
 }
