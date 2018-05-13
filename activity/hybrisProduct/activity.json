@@ -46,6 +46,10 @@
     {
       "name": "responsePayload",
       "type": "string"
+    },
+    {
+      "name": "errorMessage",
+      "type": "string"
     }    
   ]
 }

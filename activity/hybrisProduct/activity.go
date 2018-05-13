@@ -13,6 +13,7 @@ var log = logger.GetLogger("activity-hybris-product")
 const (
 	oValueStatus           = "statusCode"
 	oValueResponsePayload  = "responsePayload"
+	oValueErrorMessage     = "errorMessage"
 	eInternalError         = "500"
 	iValueRequestType      = "requestType"
 	iValueAPIKey           = "APIKey"
@@ -76,6 +77,10 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 	case ConstDeleteProduct:
 		URL = fmt.Sprintf("%s%s%s%s%s%s%s", BaseURL, "/", Tenant, "/", "products", "/", ProductId)
 		method = "DELETE"
+	default:
+		log.Errorf("Should choose atleast one option for requestType")
+		SetOutput(context, "500", "Should choose atleast one option for requestType")
+		return true, fmt.Errorf("Should choose atleast one option for requestType")
 	}
 
 	log.Info("Computed URL :", URL)
@@ -89,7 +94,7 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 	req, err := http.NewRequest(method, URL, requestBuffer)
 	if err != nil {
 		log.Errorf("Error Creating HTTP Request %s", err.Error())
-		SetOutput(context, "500")
+		SetOutput(context, "500", err.Error())
 		return true, fmt.Errorf("Error Creating HTTP Request %s", err.Error())
 	}
 
@@ -100,13 +105,13 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 
 	if err != nil {
 		log.Errorf("Error HTTP Processing %s", err.Error())
-		SetOutput(context, "500")
+		SetOutput(context, "500", err.Error())
 		return true, fmt.Errorf("Error HTTP Processing %s", err.Error())
 	}
 
 	if resp == nil {
 		log.Error("Error HTTP Processing Empty Response from Server")
-		SetOutput(context, "500")
+		SetOutput(context, "500", err.Error())
 		return false, fmt.Errorf("Error HTTP Processing Empty Response from Server")
 	}
 
@@ -115,7 +120,7 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 
 	if err != nil {
 		log.Error("Error Reading Response")
-		SetOutput(context, "500")
+		SetOutput(context, "500", err.Error())
 		return true, fmt.Errorf("Error Reading Response")
 	}
 	responseBody := buf.Bytes()
@@ -130,6 +135,7 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 	return true, nil
 }
 
-func SetOutput(context activity.Context, status string) {
+func SetOutput(context activity.Context, status string, errorMessage string) {
 	context.SetOutput(oValueStatus, status)
+	context.SetOutput(oValueErrorMessage, errorMessage)
 }

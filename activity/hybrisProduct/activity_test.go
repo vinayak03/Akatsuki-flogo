@@ -134,6 +134,20 @@ func TestGetProductFail(t *testing.T) {
 	assert.Equal(t, "500", status, "Response Code does not match")
 	t.Log("TestGetProduct Output\n Status:", status, "\nResponsePayload", payload)
 }
+func TestWrongOption(t *testing.T) {
+	act := NewActivity(getActivityMetadata())
+	tc := test.NewTestActivityContext(getActivityMetadata())
+
+	setInput(tc, "1", "bvCSvnE0BAYcOLKFAD9GxnSToKIwUUWJ", "http://localhost:7779", "dummy", "product1", "")
+
+	act.Eval(tc)
+
+	status := tc.GetOutput(oValueStatus).(string)
+	payload := tc.GetOutput(oValueResponsePayload)
+
+	assert.Equal(t, "500", status, "Response Code does not match")
+	t.Log("TestGetProduct Output\n Status:", status, "\nResponsePayload", payload)
+}
 
 func setInput(tc *test.TestActivityContext, requestType string, APIKey string, url string, tenant string, productId string, body string) {
 	tc.SetInput(iValueRequestType, requestType)
