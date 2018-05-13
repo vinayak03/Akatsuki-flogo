@@ -1,0 +1,61 @@
+{
+  "name": "hyperledgerFabricChainCode",
+  "version": "0.0.1",
+  "type": "flogo:activity",
+  "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hyperledgerFabricChainCode",
+  "description": "Plugin to Invoke and Query Hyperledger Smart Contracts(ChainCodes)",
+  "author": "Vinayak Kadam <vkadam@tibco.com>",
+  "inputs":[
+    {
+      "name": "NetworkConfig",
+      "type": "string"
+    },
+	{
+      "name": "RequestType",
+      "type": "string",
+	  "required": true,
+      "allowed" : ["RegisterUser","EnrollUser","RevokeUser"]
+    },
+	{
+      "name": "AdminUser",
+      "type": "string",
+      "required": true
+    },
+	{
+      "name": "AdminPasswd",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "Username",
+      "type": "string",
+      "required": true
+    }
+    ,
+    {
+      "name": "TypeOfUser",
+      "type": "string",
+      "required": true
+    }
+    ,
+    {
+      "name": "MaxEnrollments",
+      "type": "int",
+      "required": false,
+      "default" : "-1"
+    }
+     ,
+    {
+      "name": "Affiliation",
+      "type": "string",
+      "required": true
+    }
+    
+  ],
+  "outputs": [
+    {
+      "name": "Status",
+      "type": "string"
+    }
+  ]
+}
