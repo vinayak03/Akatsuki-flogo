@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-var log = logger.GetLogger("activity-hybrisProduct")
+var log = logger.GetLogger("activity-hybris-product")
 
 const (
 	oValueStatus           = "statusCode"
@@ -87,6 +87,11 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 	}
 
 	req, err := http.NewRequest(method, URL, requestBuffer)
+	if err != nil {
+		log.Errorf("Error Creatign HTTP Request %s", err.Error())
+		SetOutput(context, "500")
+		return true, fmt.Errorf("Error Creatign HTTP Request %s", err.Error())
+	}
 
 	client := &http.Client{}
 	req.Header.Add("Authorization", fmt.Sprint("bearer ", APIKey))
@@ -95,11 +100,13 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 
 	if err != nil {
 		log.Errorf("Error HTTP Processing %s", err.Error())
-		return false, fmt.Errorf("Error HTTP Processing %s", err.Error())
+		SetOutput(context, "500")
+		return true, fmt.Errorf("Error HTTP Processing %s", err.Error())
 	}
 
 	if resp == nil {
 		log.Error("Error HTTP Processing Empty Response from Server")
+		SetOutput(context, "500")
 		return false, fmt.Errorf("Error HTTP Processing Empty Response from Server")
 	}
 
@@ -107,11 +114,13 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 	_, err = buf.ReadFrom(resp.Body)
 
 	if err != nil {
-		fmt.Println("Error in reading data")
+		log.Error("Error Reading Response")
+		SetOutput(context, "500")
+		return true, fmt.Errorf("Error Reading Response")
 	}
 	responseBody := buf.Bytes()
-	log.Info("Response Body: ", string(responseBody))
-	log.Info("Response Code: ", fmt.Sprintf("%d", resp.StatusCode))
+	log.Debug("Response Body: ", string(responseBody))
+	log.Debug("Response Code: ", fmt.Sprintf("%d", resp.StatusCode))
 
 	// Set the result as part of the context
 	context.SetOutput(oValueStatus, fmt.Sprintf("%d", resp.StatusCode))
@@ -119,4 +128,8 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 
 	// Signal to the Flogo engine that the activity is completed
 	return true, nil
+}
+
+func SetOutput(context activity.Context, status string) {
+	context.SetOutput(oValueStatus, status)
 }
