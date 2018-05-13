@@ -88,9 +88,9 @@ func (a *HybrisProductActivity) Eval(context activity.Context) (done bool, err e
 
 	req, err := http.NewRequest(method, URL, requestBuffer)
 	if err != nil {
-		log.Errorf("Error Creatign HTTP Request %s", err.Error())
+		log.Errorf("Error Creating HTTP Request %s", err.Error())
 		SetOutput(context, "500")
-		return true, fmt.Errorf("Error Creatign HTTP Request %s", err.Error())
+		return true, fmt.Errorf("Error Creating HTTP Request %s", err.Error())
 	}
 
 	client := &http.Client{}

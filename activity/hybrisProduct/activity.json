@@ -4,7 +4,7 @@
   "ref": "github.com/vinayak03/Akatsuki-flogo/activity/hybrisProduct",
   "type": "flogo:activity",
   "description": "activity description",
-  "author": "Prashant Shinde <prshinde@tibco.com>, Vinayak03 vkadam@tibco.com, Rajesh rvadde@tibco.com",
+  "author": "Prashant <prshinde@tibco.com>, Vinayak03 vkadam@tibco.com, Rajesh rvadde@tibco.com",
   "inputs":[
     {
       "name": "requestType",

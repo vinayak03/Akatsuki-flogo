@@ -41,8 +41,8 @@ func TestGetProduct(t *testing.T) {
 	status := tc.GetOutput(oValueStatus).(string)
 	payload := tc.GetOutput(oValueResponsePayload)
 
-	assert.Equal(t, "200", status, "Response Code doesnot match")
-	t.Log("TestQuery Output\n Status:", status, "\nResponsePayload", payload)
+	assert.Equal(t, "200", status, "Response Code does not match")
+	t.Log("TestGetProduct Output\n Status:", status, "\nResponsePayload", payload)
 }
 
 func TestGetAllProducts(t *testing.T) {
@@ -56,23 +56,38 @@ func TestGetAllProducts(t *testing.T) {
 	status := tc.GetOutput(oValueStatus).(string)
 	payload := tc.GetOutput(oValueResponsePayload)
 
-	assert.Equal(t, "200", status, "Response Code doesnot match")
-	t.Log("TestGetProducts Output\n Status:", status, "\nResponsePayload", payload)
+	assert.Equal(t, "200", status, "Response Code does not match")
+	t.Log("TestGetAllProducts Output\n Status:", status, "\nResponsePayload", payload)
 }
 
-func TestDeleteAllProducts(t *testing.T) {
+func TestDeleteProduct(t *testing.T) {
 	act := NewActivity(getActivityMetadata())
 	tc := test.NewTestActivityContext(getActivityMetadata())
 
-	setInput(tc, "GetAllProducts", "bvCSvnE0BAYcOLKFAD9GxnSToKIwUUWJ", "http://localhost:7778", "dummy", "", "")
+	setInput(tc, "DeleteProduct", "bvCSvnE0BAYcOLKFAD9GxnSToKIwUUWJ", "http://localhost:7778", "dummy", "product1", "")
 
 	act.Eval(tc)
 
 	status := tc.GetOutput(oValueStatus).(string)
 	payload := tc.GetOutput(oValueResponsePayload)
 
-	assert.Equal(t, "200", status, "Response Code doesnot match")
-	t.Log("TestGetProducts Output\n Status:", status, "\nResponsePayload", payload)
+	assert.Equal(t, "200", status, "Response Code does not match")
+	t.Log("TestDeleteProduct Output\n Status:", status, "\nResponsePayload", payload)
+}
+
+func TestDeleteAllProducts(t *testing.T) {
+	act := NewActivity(getActivityMetadata())
+	tc := test.NewTestActivityContext(getActivityMetadata())
+
+	setInput(tc, "DeleteAllProducts", "bvCSvnE0BAYcOLKFAD9GxnSToKIwUUWJ", "http://localhost:7778", "dummy", "", "")
+
+	act.Eval(tc)
+
+	status := tc.GetOutput(oValueStatus).(string)
+	payload := tc.GetOutput(oValueResponsePayload)
+
+	assert.Equal(t, "200", status, "Response Code does not match")
+	t.Log("TestDeleteAllProducts Output\n Status:", status, "\nResponsePayload", payload)
 }
 
 func TestUpdateProduct(t *testing.T) {
@@ -86,8 +101,8 @@ func TestUpdateProduct(t *testing.T) {
 	status := tc.GetOutput(oValueStatus).(string)
 	payload := tc.GetOutput(oValueResponsePayload)
 
-	assert.Equal(t, "200", status, "Response Code doesnot match")
-	t.Log("TestGetProducts Output\n Status:", status, "\nResponsePayload", payload)
+	assert.Equal(t, "200", status, "Response Code does not match")
+	t.Log("TestUpdateProduct Output\n Status:", status, "\nResponsePayload", payload)
 }
 
 func setInput(tc *test.TestActivityContext, requestType string, APIKey string, url string, tenant string, productId string, body string) {
