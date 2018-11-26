@@ -1,0 +1,23 @@
+{
+  "name": "sleep",
+  "version": "0.0.1",
+  "ref": "github.com/vinayak03/Akatsuki-flogo/activity/sleep",
+  "type": "flogo:activity",
+  "description": "Sleep activity in flogo",
+  "author": "Vinayak03 vkadam@tibco.com",
+  "inputs":[
+    {
+      "name": "Unit",
+      "type": "string",
+	  "required": true,
+      "allowed" : ["Miliseconds","Seconds", "Minutes","Hours"]
+    },
+    {
+      "name": "Interval",
+      "type": "integer",
+      "required": true
+    }
+  ],
+  "outputs": [
+  ]
+}
