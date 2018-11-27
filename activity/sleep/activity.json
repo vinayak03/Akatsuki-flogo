@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "ref": "github.com/vinayak03/Akatsuki-flogo/activity/sleep",
   "type": "flogo:activity",
-  "title": "Sleep"
+  "title": "Sleep",
   "description": "Sleep activity in flogo",
   "author": "Vinayak03 vkadam@tibco.com",
   "inputs":[
